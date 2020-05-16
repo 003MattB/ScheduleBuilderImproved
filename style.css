@@ -1,0 +1,22 @@
+* {
+    position: relative;
+}
+.card-bg1 {
+    background-color: #F78888;
+}
+.day-bg {
+    background-color: #5DA2D5;
+    opacity: 30%;
+}
+.card-time {
+    font-size: .7rem;
+}
+#add-btn {
+    background-color: #24de7e;
+}
+.row {
+    height: 50px;
+}
+.border-dash {
+    border-style: dashed;
+}
