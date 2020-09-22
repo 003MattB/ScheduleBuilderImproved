@@ -1,8 +1,20 @@
-* {
-    position: relative;
-}
+/** {*/
+/*    position: relative;*/
+/*}*/
 .card-bg1 {
     background-color: #F78888;
+}
+.card-bg2 {
+    background-color: #F3D250;
+}
+.card-bg3 {
+    background-color: #ECECEC;
+}
+.card-bg4 {
+    background-color: #90CCF4;
+}
+.card-bg5 {
+    background-color: #9FEDD7;
 }
 .day-bg {
     background-color: #5DA2D5;
@@ -11,12 +23,100 @@
 .card-time {
     font-size: .7rem;
 }
+button {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+}
 #add-btn {
     background-color: #24de7e;
+    border-radius: 2em;
+    cursor: pointer;
 }
+.wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+}
+
 .row {
     height: 50px;
 }
 .border-dash {
     border-style: dashed;
+}
+
+
+.card-title {
+    width: fit-content;
+}
+my-card {
+    position: relative;
+}
+
+my-card div div svg{
+    position: absolute;
+    border: 2px black;
+    top: 0px;
+    right: 0px;
+}
+my-card div div svg:hover {
+    background-color: red;
+    border-radius: 8px;
+}
+my-card:hover {
+    background-color: #24de7e;
+    z-index: 9999;
+}
+
+/* sidebar */
+#sidebar {
+    background: #7386D5;
+    color: #fff;
+    min-width: 250px;
+    max-width: 250px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    /* top layer */
+    z-index: 9999;
+}
+
+.content {
+    padding-left: 260px;
+    width: 100%;
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    /* full screen */
+    width: 100vw;
+    height: 100vh;
+    /* transparent black */
+    background: rgba(0, 0, 0, 0.7);
+    /* middle layer, i.e. appears below the sidebar */
+    z-index: 998;
+    opacity: 0;
+    /* animate the transition */
+    transition: all 0.5s ease-in-out;
+}
+/* display .overlay when it has the .active class */
+.overlay.active {
+    display: block;
+    opacity: 1;
+}
+
+#dismiss {
+    width: 35px;
+    height: 35px;
+    position: absolute;
+    /* top right corner of the sidebar */
+    top: 10px;
+    right: 10px;
 }

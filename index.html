@@ -3,65 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <title>Scheduler</title>
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <link rel="stylesheet" href="./style.css" type="text/css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body>
-<div class="container">
-    <div class="row">
-        <div class="col-1" id="r0c0">
-            <button type="button" class="rounded-circle btn-sm" id="add-btn" data-toggle="modal" data-target="#addModal">+</button>
+<div class="wrapper">
+    <!-- Sidebar -->
+    <nav id="sidebar">
+
+        <div id="dismiss">
+            <i class="fas fa-arrow-left"></i>
         </div>
-        <div class="col text-center" id="r0c1">Monday</div>
-        <div class="col text-center" id="r0c2">Tuesday</div>
-        <div class="col text-center" id="r0c3">Wednesday</div>
-        <div class="col text-center" id="r0c4">Thursday</div>
-        <div class="col text-center" id="r0c5">Friday</div>
-        <div class="col text-center" id="r0c6">Saturday</div>
-        <div class="col text-center" id="r0c7">Sunday</div>
-    </div>
-    <div class="row">
-        <div class="col-1" id="r1c0">8:00</div>
-    </div>
-    <div class="row">
-        <div class="col-1" id="r2c0">9:00</div>
-    </div>
-    <div class="row">
-        <div class="col-1" id="r3c0">10:00</div>
-    </div>
-    <div class="row">
-        <div class="col-1" id="r4c0">11:00</div>
-    </div>
-    <div class="row">
-        <div class="col-1" id="r5c0">12:00</div>
-    </div>
-    <div class="row">
-        <div class="col-1" id="r6c0">13:00</div>
-    </div>
-    <div class="row">
-        <div class="col-1" id="r7c0">14:00</div>
-    </div>
-    <div class="row">
-        <div class="col-1" id="r8c0">15:00</div>
-    </div>
-    <div class="row">
-        <div class="col-1" id="r9c0">16:00</div>
-    </div>
-    <div class="row">
-        <div class="col-1" id="r10c0">17:00</div>
-    </div>
-    <div class="row">
-        <div class="col-1" id="r11c0">18:00</div>
-    </div>
-    <div class="row">
-        <div class="col-1 id="r12c0">19:00</div>
-    </div>
-    <div class="row">
-        <div class="col-1" id="r13c0">20:00</div>
+
+        <div class="sidebar-header">
+            <h3>Course Matrix</h3>
+        </div>
+
+        <ul class="list-unstyled components">
+            <p>Dock</p>
+            <li class="active">
+                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Courses</a>
+                <ul class="collapse list-unstyled" id="homeSubmenu">
+
+                </ul>
+            </li>
+        </ul>
+        <div>Total Credits: <span id="creditsTotal">0</span></div>
+    </nav>
+    <div class="content">
+        <div class="row">
+            <div class="col-1" id="r0c0">
+                <button type="button" data-toggle="modal"
+                        data-target="#addModal">
+                    <svg class="bi bi-plus" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor"
+                         xmlns="http://www.w3.org/2000/svg" id="add-btn">
+                        <path fill-rule="evenodd"
+                              d="M8 3.5a.5.5 0 01.5.5v4a.5.5 0 01-.5.5H4a.5.5 0 010-1h3.5V4a.5.5 0 01.5-.5z"
+                              clip-rule="evenodd"/>
+                        <path fill-rule="evenodd" d="M7.5 8a.5.5 0 01.5-.5h4a.5.5 0 010 1H8.5V12a.5.5 0 01-1 0V8z"
+                              clip-rule="evenodd"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="col text-center" id="r0c1">Monday</div>
+            <div class="col text-center" id="r0c2">Tuesday</div>
+            <div class="col text-center" id="r0c3">Wednesday</div>
+            <div class="col text-center" id="r0c4">Thursday</div>
+            <div class="col text-center" id="r0c5">Friday</div>
+            <div class="col text-center" id="r0c6">Saturday</div>
+            <div class="col text-center" id="r0c7">Sunday</div>
+        </div>
+        <div class="row">
+            <div class="col-1" id="r1c0">8:00</div>
+        </div>
+        <div class="row">
+            <div class="col-1" id="r2c0">9:00</div>
+        </div>
+        <div class="row">
+            <div class="col-1" id="r3c0">10:00</div>
+        </div>
+        <div class="row">
+            <div class="col-1" id="r4c0">11:00</div>
+        </div>
+        <div class="row">
+            <div class="col-1" id="r5c0">12:00</div>
+        </div>
+        <div class="row">
+            <div class="col-1" id="r6c0">13:00</div>
+        </div>
+        <div class="row">
+            <div class="col-1" id="r7c0">14:00</div>
+        </div>
+        <div class="row">
+            <div class="col-1" id="r8c0">15:00</div>
+        </div>
+        <div class="row">
+            <div class="col-1" id="r9c0">16:00</div>
+        </div>
+        <div class="row">
+            <div class="col-1" id="r10c0">17:00</div>
+        </div>
+        <div class="row">
+            <div class="col-1" id="r11c0">18:00</div>
+        </div>
+        <div class="row">
+            <div class="col-1" id="r12c0">19:00</div>
+        </div>
+        <div class="row">
+            <div class="col-1" id="r13c0">20:00</div>
+        </div>
     </div>
 
-</div> <!-- end container -->
+<!--</div> &lt;!&ndash; end container &ndash;&gt;-->
+</div> <!-- end wrapper -->
 <!-- Button trigger modal -->
 
 <!-- MODAL -->
@@ -80,14 +116,14 @@
                     <div class="form-group row">
                         <label for="inputSubject" class="col-sm-2 col-form-label">Subject</label>
                         <div class="col-sm-10">
-                            <input type="text"  class="form-control" id="inputSubject"
-                                   placeholder="CSCI">
+                            <input type="text" class="form-control" id="inputSubject"
+                                   placeholder="ex: CSCI">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="inputCatalog" class="col-sm-2 col-form-label">Catalog</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputCatalog" placeholder="4061">
+                            <input type="text" class="form-control" id="inputCatalog" placeholder="ex: 4061">
                         </div>
                     </div>
                 </form>
@@ -101,11 +137,39 @@
 </div>
 
 <!-- SCRIPTS -->
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#sidebar").mCustomScrollbar({
+            theme: "minimal"
+        });
+
+        $('#dismiss, .overlay').on('click', function () {
+            // hide sidebar
+            $('#sidebar').removeClass('active');
+            // hide overlay
+            $('.overlay').removeClass('active');
+        });
+
+        $('#sidebarCollapse').on('click', function () {
+            // open sidebar
+            $('#sidebar').addClass('active');
+            // fade in the overlay
+            $('.overlay').addClass('active');
+            $('.collapse.in').toggleClass('in');
+            $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+        });
+    });
+</script>
 <script src="main.js"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
-integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
 
 </body>
 </html>
