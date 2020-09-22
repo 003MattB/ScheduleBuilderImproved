@@ -3,4 +3,9 @@ I came up with the idea when trying to create a class schedule that fit my busy 
 
 So as to still make it convenient for the user, this tool will use umn-asr/courses API to pull course information from the University of Minnesota's server and present the info in a meaningful way. 
 
+### Caveats
+- It automatically sets the next term, so you are not able to configure a schedule for a current term. 
+- You need a knowledge of courses offered in order to add them to the schedule.
+- (as of right now) It will only retrieve data for the Twin Cities campus (sorry Duluth, Moris, Crookston and Rochester)
+
 Check it out [here](https://003mattb.github.io/ScheduleBuilderImproved/)
