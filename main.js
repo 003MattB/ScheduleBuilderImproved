@@ -292,5 +292,5 @@ function getNextSTRM(curSemester) {
         return (year - 1900).toString() + '9';
     }
     // spring of following year
-    return (year + 1899).toString() + '3';
+    return (year - 1899).toString() + '3';
 }
