@@ -283,6 +283,7 @@ function getCurrentSemester () {
 }
 
 function getNextSTRM(curSemester) {
+    return '1213'; // temp for testing - remove for production
     let date = new Date();
     let year = date.getFullYear();
     let sn = parseInt(curSemester);
