@@ -1,11 +1,6 @@
+import * as Course from './modules/course.js';
+
 const courses = [];
-const DAY_CODES = {"m": "1", "t": "2", "w": "3", "th": "4", "f": "5","sa": "6", "su": "7"};
-const TIME_CODES = {8: 1, 9: 2, 10: 3, 11: 4, 12: 5, 13: 6, 14: 7, 15: 8, 16: 9, 17: 10, 18: 11, 19: 12, 20: 13};
-const CARD_COLORS = ["#F78888",
-    "#F3D250",
-    "#ECECEC",
-    "#90CCF4",
-    "#9FEDD7"];
 let color_index = 0;
 
 
@@ -112,8 +107,8 @@ class UI {
         // keep the courses around for later
         courses.push(course);
         color_index = localStorage.color_index ? parseInt(localStorage.color_index) : 0;
-        const color = CARD_COLORS[((color_index) % CARD_COLORS.length)];
-        const color_class = `card-bg${((color_index) % CARD_COLORS.length) + 1}`;
+        const color = Course.CARD_COLORS[((color_index) % Course.CARD_COLORS.length)];
+        const color_class = `card-bg${((color_index) % Course.CARD_COLORS.length) + 1}`;
         localStorage.setItem("color_index", (color_index + 1));
         console.log("next color index: " + localStorage.color_index);
         for (let i = 0; i < course.sections.length; i++) {
@@ -133,13 +128,20 @@ class UI {
                 card.classList.add(color_class);
                 document.querySelector(`#${id}`).appendChild(card);
                 document.querySelector(`#${id}`).classList.remove('border-bottom');
-                console.log(`creating card for ${section.meet_days[d]} ${section.meet_start_time} id: ${id}`);
+                //console.log(`creating card for ${section.meet_days[d]} ${section.meet_start_time} id: ${id}`);
             }
         }
     }
 
     static addCourseToMatrix(course) {
-        let li = "<li>" + course.subject + course.catalog_number + "</li>";
+        let heading = course.subject + course.catalog_number;
+        let sub_id = heading + "menu";
+        let li = `<li><a href="#${sub_id}" data-toggle="collapse" aria-expanded="true">${heading}</a></li>`;
+        li += `<li><ul id="${sub_id}" class="collapse list-unstyled">`;
+        for (let i = 0; i < course.sections.length; i++) {
+            li += `<li>${course.sections[i].section_number}</li>`;
+        }
+        li += "</ul></li>";
         let item = document.createElement("li");
         item.innerHTML = li;
         document.getElementById("homeSubmenu").appendChild(item);
@@ -154,8 +156,8 @@ class UI {
     }
 
     static getSectionLocationID(day, startTime) {
-        let col = "c" + DAY_CODES[day];
-        let row = "r" + TIME_CODES[parseInt(startTime)];
+        let col = "c" + Course.DAY_CODES[day];
+        let row = "r" + Course.TIME_CODES[parseInt(startTime)];
         return row + col;
     }
 
@@ -170,51 +172,7 @@ class UI {
     }
 }
 
-class CourseSection {
-    constructor(coursesJsonObjectElement) {
-        this.class_number = coursesJsonObjectElement["class_number"];
-        this.section_number = coursesJsonObjectElement["number"];
-        this.type = coursesJsonObjectElement["component"];
-        this.instruction_mode = coursesJsonObjectElement["instruction_mode"]["instruction_mode_id"];
-        this.meet_start_time = coursesJsonObjectElement["meeting_patterns"][0]["start_time"];
-        this.meet_end_time = coursesJsonObjectElement["meeting_patterns"][0]["end_time"];
-        this.meet_days = [];
-        for(let i = 0; i < coursesJsonObjectElement["meeting_patterns"][0]["days"].length; i++) {
-            this.meet_days.push(coursesJsonObjectElement["meeting_patterns"][0]["days"][i]["abbreviation"]);
-        }
-        this.instructors = coursesJsonObjectElement["instructors"];
-    }
 
-    startTimeAsNumber () {
-        return this.timeAsNumber(this.meet_start_time);
-    }
-
-    endTimeAsNumber () {
-        return this.timeAsNumber(this.meet_end_time);
-    }
-
-    timeAsNumber (timeString) {
-        const sparts = timeString.split(":");
-        return (parseInt(sparts[0]) + (parseInt(sparts[1]) / 60));
-    }
-
-}
-
-class Course {
-    constructor(coursesJsonObject) {
-        this.couse_id = coursesJsonObject["course_id"];
-        this.catalog_number = coursesJsonObject["catalog_number"];
-        this.description = coursesJsonObject["description"];
-        this.title = coursesJsonObject["title"];
-        this.subject = coursesJsonObject["subject"]["subject_id"];
-        this.subject_description = coursesJsonObject["subject"]["description"];
-        this.sections = [];
-        for (let i = 0; i < coursesJsonObject["sections"].length; i++) {
-            this.sections.push(new CourseSection(coursesJsonObject["sections"][i]));
-        }
-        this.credits = parseInt(coursesJsonObject["credits_maximum"]);
-    }
-}
 
 document.querySelector('.modal-footer').addEventListener('click', (event) => {
     if (event.target.textContent.toLowerCase() === "submit") {
@@ -244,7 +202,7 @@ document.querySelector('.modal-footer').addEventListener('click', (event) => {
                     alert(`no class found for ${s}${c}`);
                 } else {
                     console.log(`${myJson["courses"].length} courses found for ${s}${c}`);
-                    let course = new Course(myJson["courses"][0]);
+                    let course = new Course.Course(myJson["courses"][0]);
                     UI.createCards(course);
                     UI.addCourseToMatrix(course);
                     UI.updateCredits();
