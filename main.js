@@ -1,4 +1,5 @@
 import * as Course from './modules/course.js';
+import * as Matrix from './modules/matrix.js';
 
 const courses = [];
 let color_index = 0;
@@ -134,14 +135,15 @@ class UI {
     }
 
     static addCourseToMatrix(course) {
-        let heading = course.subject + course.catalog_number;
-        let sub_id = heading + "menu";
-        let li = `<li><a href="#${sub_id}" data-toggle="collapse" aria-expanded="true">${heading}</a></li>`;
-        li += `<li><ul id="${sub_id}" class="collapse list-unstyled">`;
-        for (let i = 0; i < course.sections.length; i++) {
-            li += `<li>${course.sections[i].section_number}</li>`;
-        }
-        li += "</ul></li>";
+        // let heading = course.subject + course.catalog_number;
+        // let sub_id = heading + "menu";
+        // let li = `<li><a href="#${sub_id}" data-toggle="collapse" aria-expanded="true">${heading}</a></li>`;
+        // li += `<li><ul id="${sub_id}" class="collapse list-unstyled">`;
+        // for (let i = 0; i < course.sections.length; i++) {
+        //     li += `<li>${course.sections[i].section_number}</li>`;
+        // }
+        // li += "</ul></li>";
+        let li = "<li>" + Matrix.createCourseLayer(course) + "</li>";
         let item = document.createElement("li");
         item.innerHTML = li;
         document.getElementById("homeSubmenu").appendChild(item);
@@ -205,6 +207,7 @@ document.querySelector('.modal-footer').addEventListener('click', (event) => {
                     let course = new Course.Course(myJson["courses"][0]);
                     UI.createCards(course);
                     UI.addCourseToMatrix(course);
+                    Matrix.changeLayerColor(course.subject,course.catalog_number,"#F3D250");
                     UI.updateCredits();
                 }
                 // const t = myJson["courses"][0]["title"];

@@ -51,4 +51,32 @@ export class Course {
         }
         this.credits = parseInt(coursesJsonObject["credits_maximum"]);
     }
+
+    /**
+     * Returns a subset of sections which are lecture sections.
+     * @return {[CourseSection]}
+     */
+    lectureSections() {
+        let sections = [];
+        for (let i = 0; i < this.sections.length; i++) {
+            if (this.sections[i].type === 'LEC') {
+                sections.push(this.sections[i]);
+            }
+        }
+        return sections;
+    }
+
+    /**
+     * Returns the inverse subset of lecture sections. They could be called LAB sections or Discussion sections.
+     * @return {[CourseSection]}
+     */
+    labSections() {
+        let sections = [];
+        for (let i = 0; i < this.sections.length; i++) {
+            if (this.sections[i].type != 'LEC') {
+                sections.push(this.sections[i]);
+            }
+        }
+        return sections;
+    }
 }
