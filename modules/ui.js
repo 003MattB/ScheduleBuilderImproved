@@ -51,6 +51,17 @@ export class UI {
         let item = document.createElement("li");
         item.innerHTML = li;
         document.getElementById("homeSubmenu").appendChild(item);
+        let course_head = `${course.subject}${course.catalog_number}`
+        let num_sections = course.sections.length;
+        for (let i = 0; i < num_sections; i++) {
+            let section_num = course.sections[i].section_number;
+            let layer = Matrix.getLayerSection(course_head,section_num);
+            let card_color_class = this.getCardColorClass(course_head, section_num)
+            layer.addEventListener('click', (e) => {
+                let visibility = UI.toggleCardVisibility(course_head, section_num);
+                Matrix.toggleVisibility(layer, visibility, card_color_class);
+            });
+        }
     }
 
     static cardHeightFromSection(section) {
@@ -67,7 +78,7 @@ export class UI {
         return row + col;
     }
 
-    static updateCredits() {
+    static updateCredits(courses) {
         console.log("updating the total credits for " + courses.length + " courses");
         let total = 0;
         for (let i = 0; i < courses.length; i++) {
@@ -75,5 +86,51 @@ export class UI {
         }
         console.log("total credits is: " + total);
         document.getElementById("creditsTotal").innerText = total;
+    }
+
+    static hideCard(card) {
+        card.style.display = 'none';
+    }
+
+    static showCard(card) {
+        card.style.display = 'block';
+    }
+
+    static toggleCardVisibility(card_header, section) {
+        let is_visible = true;
+        let cards = this.getCards(card_header, section);
+        for (let i = 0; i < cards.length; i++) {
+            if (cards[i].style.display === "none") {
+                this.showCard(cards[i]);
+                is_visible = true;
+            } else {
+                this.hideCard(cards[i]);
+                is_visible = false;
+            }
+        }
+        return is_visible;
+    }
+
+    static getCards(card_header, section) {
+        let cards = [];
+        let all_cards = document.querySelectorAll('my-card');
+        for (let i = 0; i < all_cards.length; i++) {
+            if (all_cards[i].children[0].children[0].children[0].textContent === card_header &&
+                all_cards[i].children[0].children[0].children[2].textContent === section) {
+                cards.push(all_cards[i]);
+            }
+        }
+        return cards;
+    }
+
+    static getCardColorClass(card_header, section) {
+        let cards = this.getCards(card_header,section);
+        let color = '';
+        for (let i = 0; i < cards[0].classList.length; i++) {
+            if (cards[0].classList[i].startsWith('card-bg')) {
+                color = cards[0].classList[i];
+            }
+        }
+        return color;
     }
 }

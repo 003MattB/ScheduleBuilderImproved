@@ -2,7 +2,7 @@ import * as Course from './modules/course.js';
 import * as Matrix from './modules/matrix.js';
 import {UI} from './modules/ui.js';
 
-
+let courses = [];
 
 class Card extends HTMLElement{
 
@@ -127,13 +127,14 @@ document.querySelector('.modal-footer').addEventListener('click', (event) => {
                 } else {
                     //console.log(`${myJson["courses"].length} courses found for ${s}${c}`);
                     let course = new Course.Course(myJson["courses"][0]);
+                    courses.push(course);
                     let color_index = localStorage.color_index ? parseInt(localStorage.color_index) : 0;
                     const color_class = `card-bg${((color_index) % Course.CARD_COLORS.length) + 1}`;
                     localStorage.setItem("color_index", (color_index + 1));
                     UI.createCards(course, color_class);
                     UI.addCourseToMatrix(course);
                     Matrix.changeLayerColor(course.subject,course.catalog_number,color_class);
-                    UI.updateCredits();
+                    UI.updateCredits(courses);
                 }
                 // const t = myJson["courses"][0]["title"];
                 // const st = myJson["courses"][0]["sections"][0]["meeting_patterns"][0]["start_time"];

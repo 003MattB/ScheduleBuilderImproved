@@ -109,4 +109,16 @@ function getLayerSection(course, section) {
     return null;
 }
 
-export {createCourseLayer, changeLayerColor};
+function toggleVisibility(layerSection, visible, cardColorClass) {
+    if (visible) {
+        layerSection.classList.remove('card-bg_muted');
+        layerSection.classList.add(cardColorClass);
+    } else {
+        layerSection.classList.add('card-bg_muted');
+        layerSection.classList.remove(cardColorClass);
+    }
+
+}
+
+export {createCourseLayer, changeLayerColor, getLayerSection, getLayerHead, getLayer,
+toggleVisibility};
