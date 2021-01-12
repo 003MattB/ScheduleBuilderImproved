@@ -45,12 +45,49 @@ function changeLayerColor(course_subject, course_catalog_number, color) {
     }
 }
 
-function getLayer(layer_head) {
+/**
+ * Gets the element from the DOM which resides in the nav section which corresponds to the
+ * course defined by course subject and course catalog number
+ * @param course = course.subject + course.catalog_number
+ * @return {null|Element}
+ */
+function getLayer(course) {
     let elements = document.getElementsByClassName("card-body");
     for (let i = 0; i < elements.length; i++) {
         if (elements[i].childElementCount > 0 && elements[i].children[0].childElementCount > 0 && elements[i].children[0].children[0].childElementCount > 0) {
-            if (elements[i].children[0].children[0].children[0].textContent === layer_head) {
+            if (elements[i].children[0].children[0].children[0].textContent === course) {
                 return elements[i];
+            }
+        }
+    }
+    return null;
+}
+
+/**
+ * Gets the first card from the layer
+ * @param course
+ * @return {null|Element}
+ */
+function getLayerHead(course) {
+    let layer = getLayer(course);
+    if (layer) {
+        return layer.children[0];
+    }
+    return null;
+}
+
+/**
+ * Gets the section card from the layer
+ * @param course
+ * @param section {string} - the section number in the format "xxx" ie "001" or "011"
+ * @return {null|Element}
+ */
+function getLayerSection(course, section) {
+    let layer = getLayer(course);
+    if (layer) {
+        for (let i = 0; i < layer.children[1].childElementCount; i++) {
+            if (layer.children[1].children[i].textContent.includes(section)) {
+                return layer.children[1].children[i];
             }
         }
     }
