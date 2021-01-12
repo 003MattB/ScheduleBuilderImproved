@@ -36,13 +36,28 @@ function createCourseLayer(course) {
     return content;
 }
 
-function changeLayerColor(course_subject, course_catalog_number, color) {
+function changeLayerColor(course_subject, course_catalog_number, color_class) {
     let course_des = course_subject + course_catalog_number;
     let container = getLayer(course_des);
-    container.children[0].children[0].style.background = color;
-    for (let i = 0; i < container.children[1].childElementCount; i++) {
-        container.children[1].children[i].style.background = color;
+    let cl = '';
+    for (let i = 0; i < container.children[0].children[0].classList.length; i++) {
+        if (container.children[0].children[0].classList[i].startsWith('card-bg')) {
+            cl = container.children[0].children[0].classList[i];
+        }
     }
+    try {
+        container.children[0].children[0].classList.remove(cl);
+    } catch (e) {}
+        container.children[0].children[0].classList.add(color_class);
+        for (let i = 0; i < container.children[1].childElementCount; i++) {
+            try {
+                container.children[1].children[i].classList.remove(cl);
+            } catch (e) {}
+            container.children[1].children[i].classList.add(color_class);
+            //container.children[1].children[i].style.background = color;
+        }
+
+
 }
 
 /**

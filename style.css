@@ -113,8 +113,8 @@ button {
 .top-container > * , .lecture-center, .discussion-head {
     margin-left: 10px;
     padding-left: 8px;
-    background: #f0f0f0;
-    color: #484848;
+    /*background: #f0f0f0;*/
+    /*color: #484848;*/
     border-radius: 8px;
     margin-bottom: 3px;
 }
