@@ -51,11 +51,12 @@ export class UI {
         let item = document.createElement("li");
         item.innerHTML = li;
         document.getElementById("homeSubmenu").appendChild(item);
-        let course_head = `${course.subject}${course.catalog_number}`
+        let course_head = `${course.subject}${course.catalog_number}`;
         let num_sections = course.sections.length;
         for (let i = 0; i < num_sections; i++) {
             let section_num = course.sections[i].section_number;
             let layer = Matrix.getLayerSection(course_head,section_num);
+            console.log("looking for color class for ", course_head, section_num);
             let card_color_class = this.getCardColorClass(course_head, section_num)
             layer.addEventListener('click', (e) => {
                 let visibility = UI.toggleCardVisibility(course_head, section_num);

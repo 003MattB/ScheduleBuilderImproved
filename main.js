@@ -1,6 +1,7 @@
 import * as Course from './modules/course.js';
 import * as Matrix from './modules/matrix.js';
 import {UI} from './modules/ui.js';
+import {Term} from './modules/terms.js';
 
 let courses = [];
 
@@ -113,9 +114,7 @@ document.querySelector('.modal-footer').addEventListener('click', (event) => {
             for example: spring 2020 =
             2020 - 1900 + 3 = '120' + '3' = '1203'
          */
-        let semester = getCurrentSemester();
-        let t = getNextSTRM(semester);
-        console.log(`next strm is ${t}`)
+        let t = document.getElementById('term-select').value;
         const url = `https://courses.umn.edu/campuses/umntc/terms/${t}/courses.json?q=catalog_number=${c},subject_id=${s}`
         fetch(url)
             .then(function(response) {
@@ -169,6 +168,24 @@ function getCurrentSemester () {
     return '9';
 }
 
+/**
+ * Returns the term code for the asr course api
+ * @param year {int} format yyyy
+ * @param semester {string} spring | summer | fall
+ * @returns {string}
+ */
+function getSTRM(year, semester) {
+    let s_code = '';
+    if (semester === 'spring') {
+        s_code = '3'
+    } else if (semester === 'summer') {
+        s_code = '5'
+    } else { // fall
+        s_code = '9';
+    }
+    return (year - 1900).toString() + s_code;
+}
+
 function getNextSTRM(curSemester) {
     return '1213'; // temp for testing - remove for production
     let date = new Date();
@@ -182,3 +199,28 @@ function getNextSTRM(curSemester) {
     // spring of following year
     return (year - 1899).toString() + '3';
 }
+
+/**
+ * Initializes the list of semesters to the previous, current, and next semester
+ */
+function initTermSelect() {
+    let select = document.getElementById('term-select');
+    let first = document.createElement('option');
+    let second = document.createElement('option');
+    let third = document.createElement('option');
+    let today = new Date();
+    let term = new Term(today.getFullYear(), today.getMonth() + 1);
+    first.text = term.getPreviousTerm().toString();
+    second.text = term.toString();
+    third.text = term.getNextTerm().toString();
+    first.value = term.getPreviousTerm().STERM();
+    second.value = term.STERM();
+    third.value = term.getNextTerm().STERM();
+    select.add(first);
+    select.add(second);
+    select.add(third);
+    select.value = second.value;
+}
+$(document).ready(function () {
+    initTermSelect();
+});
