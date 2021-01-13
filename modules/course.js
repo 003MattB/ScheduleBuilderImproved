@@ -47,6 +47,10 @@ export class Course {
         this.subject_description = coursesJsonObject["subject"]["description"];
         this.sections = [];
         for (let i = 0; i < coursesJsonObject["sections"].length; i++) {
+            if (coursesJsonObject["sections"][i]['status'] != "A") {
+                // skip sections that are not available
+                continue;
+            }
             this.sections.push(new CourseSection(coursesJsonObject["sections"][i]));
         }
         this.credits = parseInt(coursesJsonObject["credits_maximum"]);
