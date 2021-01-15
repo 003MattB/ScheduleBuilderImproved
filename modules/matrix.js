@@ -86,7 +86,7 @@ function getLayer(course) {
 function getLayerHead(course) {
     let layer = getLayer(course);
     if (layer) {
-        return layer.children[0];
+        return layer.children[0].children[0];
     }
     return null;
 }

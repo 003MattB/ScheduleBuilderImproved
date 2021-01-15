@@ -21,7 +21,11 @@ class Card extends HTMLElement{
         this.innerHTML = this.getInnerHTML();
         this.addEventListener('click', (event) => {
             if ($(event.target).hasClass('bi-x')) {
-                this.parentNode.removeChild(this);
+                // this.parentNode.removeChild(this);
+                UI.toggleCardVisibility(this.cardTitle, this.section_num);
+
+                Matrix.toggleVisibility(Matrix.getLayerSection(this.cardTitle, this.section_num),
+                    false,UI.getCardColorClass(this.cardTitle, this.section_num));
             }
         });
         // this.addEventListener('mouseenter', (event) => {
@@ -152,52 +156,7 @@ document.querySelector('.modal-footer').addEventListener('click', (event) => {
     }
 });
 
-function getCurrentSemester () {
-    /*
-    spring : 3
-    summer : 5
-    fall   : 9
-     */
-    let date = new Date();
-    let month = date.getMonth();
-    if (month < 6) {
-        return '3';
-    } else if (month < 9) {
-        return '5';
-    }
-    return '9';
-}
 
-/**
- * Returns the term code for the asr course api
- * @param year {int} format yyyy
- * @param semester {string} spring | summer | fall
- * @returns {string}
- */
-function getSTRM(year, semester) {
-    let s_code = '';
-    if (semester === 'spring') {
-        s_code = '3'
-    } else if (semester === 'summer') {
-        s_code = '5'
-    } else { // fall
-        s_code = '9';
-    }
-    return (year - 1900).toString() + s_code;
-}
-
-function getNextSTRM(curSemester) {
-    let date = new Date();
-    let year = date.getFullYear();
-    let sn = parseInt(curSemester);
-    if (sn < 5) { // summer is the next term
-        return (year - 1900).toString() + '5';
-    } else if (sn < 9) { // fall is the next term
-        return (year - 1900).toString() + '9';
-    }
-    // spring of following year
-    return (year - 1899).toString() + '3';
-}
 
 /**
  * Initializes the list of semesters to the previous, current, and next semester
@@ -219,6 +178,10 @@ function initTermSelect() {
     select.add(second);
     select.add(third);
     select.value = second.value;
+    select.addEventListener('change', () => {
+        // TODO remove all the cards, clear the matrix, and set credits to 0
+        console.log("the term changed. time to clean up the DOM");
+    });
 }
 $(document).ready(function () {
     initTermSelect();

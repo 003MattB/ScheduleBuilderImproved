@@ -56,13 +56,24 @@ export class UI {
         for (let i = 0; i < num_sections; i++) {
             let section_num = course.sections[i].section_number;
             let layer = Matrix.getLayerSection(course_head,section_num);
-            console.log("looking for color class for ", course_head, section_num);
             let card_color_class = this.getCardColorClass(course_head, section_num)
             layer.addEventListener('click', (e) => {
                 let visibility = UI.toggleCardVisibility(course_head, section_num);
                 Matrix.toggleVisibility(layer, visibility, card_color_class);
             });
         }
+        Matrix.getLayerHead(course_head).addEventListener('click', (e) => {
+            let card_color_class = '';
+            for (let i = 0; i < course.sections.length; i++) {
+                let section_num = course.sections[i].section_number;
+                let layer = Matrix.getLayerSection(course_head, section_num);
+                card_color_class = this.getCardColorClass(course_head, section_num);
+                let visibility = UI.toggleCardVisibility(course_head, section_num);
+                Matrix.toggleVisibility(layer, visibility, card_color_class);
+            }
+            Matrix.toggleVisibility(Matrix.getLayerHead(course_head),
+                false, card_color_class);
+        });
     }
 
     static cardHeightFromSection(section) {
