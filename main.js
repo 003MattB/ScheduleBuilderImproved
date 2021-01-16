@@ -4,7 +4,7 @@ import {UI} from './modules/ui.js';
 import {Term} from './modules/terms.js';
 
 let courses = [];
-
+export {courses};
 class Card extends HTMLElement{
 
     constructor() {
@@ -186,3 +186,6 @@ function initTermSelect() {
 $(document).ready(function () {
     initTermSelect();
 });
+
+MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
+

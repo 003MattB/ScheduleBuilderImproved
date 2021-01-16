@@ -1,6 +1,20 @@
+import {courses} from "../main.js";
+import {UI} from "./ui.js";
+
 export function removeCourse(course_head) {
     let layer = getLayer(course_head);
     layer.parentNode.removeChild(layer);
+    let index = -1;
+    for (let i = 0; i < courses.length; i++) {
+        let course_id = courses[i].subject + courses[i].catalog_number;
+        if (course_head == course_id) {
+            index = i;
+        }
+    }
+    if (index > -1) {
+        courses.splice(index,1);
+    }
+    UI.updateCredits(courses);
 }
 
 function addCourse(course) {
