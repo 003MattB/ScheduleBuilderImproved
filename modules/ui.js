@@ -84,7 +84,7 @@ export class UI {
     static cardHeightFromSection(section) {
         let duration = section.endTimeAsNumber() - section.startTimeAsNumber();
         // get the height of one of the rows
-        let height = document.querySelector("#r1c0").clientHeight;
+        let height = document.querySelectorAll(".row")[1].clientHeight;
         // each row is 1 hour so multiply the duration by the height to get the card height
         return duration * height;
     }
