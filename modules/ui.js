@@ -74,6 +74,11 @@ export class UI {
             Matrix.toggleVisibility(Matrix.getLayerHead(course_head),
                 false, card_color_class);
         });
+        document.getElementById(`delete-layer-${course_head}`).addEventListener('click', (e) => {
+            Matrix.removeCourse(course_head);
+            this.removeCards(course_head);
+
+        });
     }
 
     static cardHeightFromSection(section) {
@@ -127,9 +132,12 @@ export class UI {
         let cards = [];
         let all_cards = document.querySelectorAll('my-card');
         for (let i = 0; i < all_cards.length; i++) {
-            if (all_cards[i].children[0].children[0].children[0].textContent === card_header &&
-                all_cards[i].children[0].children[0].children[2].textContent === section) {
-                cards.push(all_cards[i]);
+            if (all_cards[i].children[0].children[0].children[0].textContent === card_header) {
+                if (section == null) {
+                    cards.push(all_cards[i]);
+                } else if (all_cards[i].children[0].children[0].children[2].textContent === section) {
+                    cards.push(all_cards[i]);
+                }
             }
         }
         return cards;
@@ -144,5 +152,12 @@ export class UI {
             }
         }
         return color;
+    }
+
+    static removeCards(card_header) {
+        let cards = this.getCards(card_header, null);
+        for (let i = 0; i < cards.length; i++) {
+            cards[i].parentNode.removeChild(cards[i]);
+        }
     }
 }
