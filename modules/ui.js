@@ -146,6 +146,9 @@ export class UI {
     static getCardColorClass(card_header, section) {
         let cards = this.getCards(card_header,section);
         let color = '';
+        if (cards.length == 0) {  // if there aren't any cards then it's online
+            return 'card-bg_online';
+        }
         for (let i = 0; i < cards[0].classList.length; i++) {
             if (cards[0].classList[i].startsWith('card-bg')) {
                 color = cards[0].classList[i];

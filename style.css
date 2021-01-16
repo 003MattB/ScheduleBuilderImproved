@@ -5,6 +5,10 @@
     background-color: dimgray;
     color: lightgray;
 }
+
+.card-bg_online {
+    background-color: #FF8600;
+}
 .card-bg1 {
     background-color: #F78888;
 }
