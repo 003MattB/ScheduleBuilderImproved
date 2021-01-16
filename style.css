@@ -57,6 +57,11 @@ button {
     cursor: pointer;
 }
 
+#courseToggle {
+    font-size: 2rem;
+    text-decoration: none;
+    color: #ECECEC;
+}
 
 .top-container {
     display: flex;
