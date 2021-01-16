@@ -119,7 +119,8 @@ document.querySelector('.modal-footer').addEventListener('click', (event) => {
             2020 - 1900 + 3 = '120' + '3' = '1203'
          */
         let t = document.getElementById('term-select').value;
-        const url = `https://courses.umn.edu/campuses/umntc/terms/${t}/courses.json?q=catalog_number=${c},subject_id=${s}`
+        let campus = document.getElementById('campus-select').value;
+        const url = `https://courses.umn.edu/campuses/${campus}/terms/${t}/courses.json?q=catalog_number=${c},subject_id=${s}`
         fetch(url)
             .then(function(response) {
                 return response.json();
@@ -187,5 +188,4 @@ $(document).ready(function () {
     initTermSelect();
 });
 
-MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
 
