@@ -1,6 +1,7 @@
 import * as Course from "./course.js";
 import * as Matrix from "./matrix.js";
 
+
 export class UI {
 
     static clearInput(id) {
@@ -74,11 +75,7 @@ export class UI {
             Matrix.toggleVisibility(Matrix.getLayerHead(course_head),
                 false, card_color_class);
         });
-        document.getElementById(`delete-layer-${course_head}`).addEventListener('click', (e) => {
-            Matrix.removeCourse(course_head);
-            this.removeCards(course_head);
 
-        });
     }
 
     static cardHeightFromSection(section) {

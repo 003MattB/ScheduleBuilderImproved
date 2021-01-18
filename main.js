@@ -139,6 +139,19 @@ document.querySelector('.modal-footer').addEventListener('click', (event) => {
                     UI.addCourseToMatrix(course);
                     Matrix.changeLayerColor(course.subject,course.catalog_number,color_class);
                     UI.updateCredits(courses);
+                    let course_head = course.subject + course.catalog_number;
+                    document.getElementById(`delete-layer-${course_head}`).addEventListener('click', (e) => {
+                        deleteCourse(course_head);
+                        let index = -1;
+                        for (let i = 0; i < courses.length; i++) {
+                            let course_d = courses[i].subject + courses[i].catalog_number;
+                            if (course_d == course_head) {
+                                index = i;
+                            }
+                        }
+                        courses.splice(index,1);
+                        UI.updateCredits(courses);
+                    });
                 }
                 // const t = myJson["courses"][0]["title"];
                 // const st = myJson["courses"][0]["sections"][0]["meeting_patterns"][0]["start_time"];
@@ -180,12 +193,32 @@ function initTermSelect() {
     select.add(third);
     select.value = second.value;
     select.addEventListener('change', () => {
-        // TODO remove all the cards, clear the matrix, and set credits to 0
-        console.log("the term changed. time to clean up the DOM");
+        deleteAllCourses();
+        UI.updateCredits(courses);
     });
 }
 $(document).ready(function () {
     initTermSelect();
+    document.getElementById('campus-select').addEventListener('change',(e) => {
+       deleteAllCourses();
+       UI.updateCredits(courses);
+    });
 });
 
+function deleteAllCourses() {
+    let cc = courses;
+    for (let i = 0; i < cc.length; i++) {
+        let course_head = cc[i].subject + cc[i].catalog_number;
+        // Matrix.removeCourse(course_head);
+        // UI.removeCards(course_head);
+        // console.log(courses,courses.length);
+        deleteCourse(course_head);
+    }
+    courses = [];
+}
+
+function deleteCourse(course_head) {
+    Matrix.removeCourse(course_head);
+    UI.removeCards(course_head);
+}
 
