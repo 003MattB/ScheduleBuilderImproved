@@ -41,6 +41,32 @@ button {
     cursor: pointer;
     outline: inherit;
 }
+
+#Collapse line {
+    stroke: #f0f0f0;
+}
+
+button.navbar-toggler {
+    position: fixed;
+    top: 10px;
+    left: 150px;
+    z-index: 99999;
+}
+
+button.navbar-toggler[aria-expanded="false"] {
+    left: 10px;
+    transform: rotate(180deg);
+}
+button.navbar-toggler[aria-expanded="false"] line {
+    position: relative;
+    top: revert;
+    left: revert;
+    transform: rotate(180deg);
+}
+
+
+
+
 #add-button {
     background: linear-gradient(to right, #91D08A, #139D98);
     border-radius: 6px;
@@ -152,7 +178,7 @@ my-card:hover {
     top: 0;
     left: 0;
     /* top layer */
-    z-index: 9999;
+    /*z-index: 9999;*/
 }
 
 .content {
