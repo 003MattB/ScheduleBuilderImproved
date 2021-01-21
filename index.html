@@ -8,24 +8,35 @@
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css" type="text/css">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
     <script type="module" src="main.js"></script>
 </head>
 <body>
 <div class="wrapper">
-<!--    <button id="nav-collapse-btn" class="navbar-toggler" data-toggle="collapse" data-target="#sidebar" aria-expanded="true">-->
-<!--        <svg xmlns="http://www.w3.org/2000/svg" width="68.675" height="47.157" viewBox="0 0 68.675 47.157">-->
-<!--          <g id="Collapse" transform="translate(-141.672 -102.672)">-->
-<!--            <line id="Line_7" data-name="Line 7" x1="20.75" y2="20.75" transform="translate(144.5 105.5)" fill="none" stroke="#f0f0f0" stroke-linecap="round" stroke-width="4"/>-->
-<!--            <line id="Line_9" data-name="Line 9" x1="62.25" transform="translate(146.096 126.25)" fill="none" stroke="#f0f0f0" stroke-linecap="round" stroke-width="4"/>-->
-<!--            <line id="Line_8" data-name="Line 8" x1="20.75" y2="20.75" transform="translate(165.25 126.25) rotate(90)" fill="none" stroke="#f0f0f0" stroke-linecap="round" stroke-width="4"/>-->
-<!--          </g>-->
-<!--        </svg>-->
+    <!--    <button id="nav-collapse-btn" class="navbar-toggler" data-toggle="collapse" data-target="#sidebar" aria-expanded="true">-->
+    <!--        <svg xmlns="http://www.w3.org/2000/svg" width="68.675" height="47.157" viewBox="0 0 68.675 47.157">-->
+    <!--          <g id="Collapse" transform="translate(-141.672 -102.672)">-->
+    <!--            <line id="Line_7" data-name="Line 7" x1="20.75" y2="20.75" transform="translate(144.5 105.5)" fill="none" stroke="#f0f0f0" stroke-linecap="round" stroke-width="4"/>-->
+    <!--            <line id="Line_9" data-name="Line 9" x1="62.25" transform="translate(146.096 126.25)" fill="none" stroke="#f0f0f0" stroke-linecap="round" stroke-width="4"/>-->
+    <!--            <line id="Line_8" data-name="Line 8" x1="20.75" y2="20.75" transform="translate(165.25 126.25) rotate(90)" fill="none" stroke="#f0f0f0" stroke-linecap="round" stroke-width="4"/>-->
+    <!--          </g>-->
+    <!--        </svg>-->
 
-<!--    </button>-->
+    <!--    </button>-->
     <!-- Sidebar -->
     <div id="sidebar" class="overflow-auto">
+        <button type="button" data-toggle="modal"
+                        data-target="#addModal" id="add-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" id="add">
+                        <line id="Line_4" data-name="Line 4" y2="36" transform="translate(20 2)" fill="none"
+                              stroke="#f0f0f0" stroke-linecap="round" stroke-width="4"/>
+                        <line id="Line_5" data-name="Line 5" x2="36" transform="translate(2 20)" fill="none"
+                              stroke="#f0f0f0" stroke-linecap="round" stroke-width="4"/>
+                    </svg>
+
+                </button>
+        <br>
         <label for="campus-select">Campus</label>
         <div class="select" style="width:150px;">
             <select id="campus-select">
@@ -37,13 +48,13 @@
             </select>
             <div class="select-btn" style="width:15px;"></div>
         </div>
+
         <label for="term-select">Term</label>
         <div class="select" style="width:150px;">
             <select id="term-select">
             </select>
             <div class="select-btn" style="width:15px;"></div>
         </div>
-
 
 
         <ul class="list-unstyled components">
@@ -59,14 +70,7 @@
     <div class="content">
         <div class="row">
             <div class="col-1" id="r0c0">
-                <button type="button" data-toggle="modal"
-                        data-target="#addModal" id="add-button">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" id="add">
-  <line id="Line_4" data-name="Line 4" y2="36" transform="translate(20 2)" fill="none" stroke="#f0f0f0" stroke-linecap="round" stroke-width="4"/>
-  <line id="Line_5" data-name="Line 5" x2="36" transform="translate(2 20)" fill="none" stroke="#f0f0f0" stroke-linecap="round" stroke-width="4"/>
-</svg>
 
-                </button>
             </div>
             <div class="col text-center" id="r0c1">Monday</div>
             <div class="col text-center" id="r0c2">Tuesday</div>
@@ -117,7 +121,7 @@
         </div>
     </div>
 
-<!--</div> &lt;!&ndash; end container &ndash;&gt;-->
+    <!--</div> &lt;!&ndash; end container &ndash;&gt;-->
 </div> <!-- end wrapper -->
 <!-- Button trigger modal -->
 
@@ -189,8 +193,6 @@
         });
     });
 </script>
-
-
 
 
 </body>

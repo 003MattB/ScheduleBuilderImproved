@@ -72,6 +72,7 @@ button.navbar-toggler[aria-expanded="false"] line {
     border-radius: 6px;
     height: 36px;
     width: 36px;
+    margin-bottom: 20px;
 }
 #add{
     height: 25px;
@@ -81,6 +82,10 @@ button.navbar-toggler[aria-expanded="false"] line {
     background-color: #24de7e;
     border-radius: 2em;
     cursor: pointer;
+}
+
+div.select {
+    margin-bottom: 20px;
 }
 
 #courseToggle {
@@ -169,6 +174,8 @@ my-card:hover {
 
 /* sidebar */
 #sidebar {
+    padding-top: 10px;
+    padding-left: 10px;
     background: #484848;
     color: #f0f0f0;
     min-width: 250px;
