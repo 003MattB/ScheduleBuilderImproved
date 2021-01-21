@@ -73,7 +73,7 @@ export class UI {
                 Matrix.toggleVisibility(layer, visibility, card_color_class);
             }
             Matrix.toggleVisibility(Matrix.getLayerHead(course_head),
-                false, card_color_class);
+                true, card_color_class);
         });
 
     }
