@@ -222,3 +222,27 @@ function deleteCourse(course_head) {
     UI.removeCards(course_head);
 }
 
+let observer = new MutationObserver(function(mutations) {
+  mutations.forEach(function(mutation) {
+    if (mutation.type == "attributes") {
+      // console.log("attributes changed", mutation.attributeName, mutation.attributeNamespace,
+      //     mutation.target);
+        // TODO - this doesn't work as intended
+      if (mutation.target.attributes['aria-expanded'] == 'false') {
+            let group = document.getElementById('Collapse');
+            for (let i = 0; i < group.childElementCount; i++) {
+                group.children[i].stroke = '#484848';
+            }
+      } else {
+          let group = document.getElementById('Collapse');
+            for (let i = 0; i < group.childElementCount; i++) {
+                group.children[i].stroke = '#f0f0f0';
+            }
+      }
+    }
+  });
+});
+
+observer.observe(document.getElementById("nav-collapse-btn"), {
+  attributes: true //configure it to listen to attribute changes
+});
